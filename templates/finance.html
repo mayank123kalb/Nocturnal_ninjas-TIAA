@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Strategy Predictor</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff; /* Light Blue Background */
+            text-align: center;
+            color: #333; /* Dark Gray Text Color */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #000080; /* Navy Blue Header Color */
+        }
+
+        form {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #000080; /* Navy Blue Label Color */
+        }
+
+        input,
+        select,
+        button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 2px solid #000080; /* Navy Blue Border */
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #000080; /* Navy Blue Button Color */
+            color: #fff; /* White Text Color */
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0000cd; /* Slightly Darker Blue on Hover */
+        }
+
+        p {
+            color: #000080; /* Navy Blue Text Color for Predictions */
+        }
+
+        p.error {
+            color: red;
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #000080;
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+        <a class="back-button" href="{{ url_for('index')}}">Back</a>
+    <div class="container">
+        <h1>Investment Strategy Predictor</h1>
+
+        <form action="/predict" method="post">
+            <label for="age">Age:</label>
+            <input type="text" name="age" required>
+
+            <label for="income">Income:</label>
+            <input type="text" name="income" required>
+
+            <label for="financial_goals">Financial Goals:</label>
+            <select name="financial_goals" required>
+                <option value="Education">Education</option>
+                <option value="Legacy Planning">Legacy Planning</option>
+                <option value="Retirement">Retirement</option>
+                <option value="Vacation">Vacation</option>
+                <option value="Buying a Car">Buying a Car</option>
+                <option value="Buying a Home">Buying a Home</option>
+            </select>
+
+            <label for="investment_amount">Investment Amount:</label>
+            <input type="text" name="investment_amount" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction %}
+        <p>{{ prediction }}</p>
+        {% endif %}
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

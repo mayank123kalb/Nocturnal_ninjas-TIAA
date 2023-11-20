@@ -1,0 +1,108 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!-- <meta charset="UTF-8">-->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!-- <title>Trainer Chatbot</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<h2>Chat with Gym Trainer and Dietician</h2>-->
+<!--<div id="chatbox">-->
+<!-- <p>Bot: Hello! How can I help you with your fitness and diet today?</p>-->
+<!--</div>-->
+
+<!--<textarea id="user_input" placeholder="Type your message..."></textarea>-->
+<!--<button onclick="sendMessage()">Send</button>-->
+
+<!--<script>-->
+<!-- function sendMessage() {-->
+<!-- let userMessage = document.getElementById('user_input').value;-->
+<!-- let chatbox = document.getElementById('chatbox');-->
+<!-- chatbox.innerHTML += '<p>You: ' + userMessage + '</p>';-->
+
+<!-- // Send message to Flask backend-->
+<!-- fetch('/ask', {-->
+<!-- method: 'POST',-->
+<!-- body: new URLSearchParams('user_message=' + userMessage),-->
+<!-- headers: {-->
+<!-- 'Content-Type': 'application/x-www-form-urlencoded'-->
+<!-- }-->
+<!-- })-->
+<!-- .then(response => response.json())-->
+<!-- .then(data => {-->
+<!-- chatbox.innerHTML += '<p>Bot: ' + data.response + '</p>';-->
+<!-- });-->
+
+<!-- document.getElementById('user_input').value = ''; // Clear the textarea-->
+<!-- }-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Popup</title>
+    <style>
+        /* Basic styling for chat popup */
+        #chatbox {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 10px;
+            width: 450px;
+            height: 600px;
+            border: 1px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+
+<button onclick="toggleChatbox()">Open Chat</button>
+
+<div id="chatbox">
+    <div style="height: 90%; overflow: auto;" id="messages"></div>
+    <input type="text" id="user_input" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+    function toggleChatbox() {
+        var chatbox = document.getElementById('chatbox');
+        if (chatbox.style.display === "none") {
+            chatbox.style.display = "block";
+        } else {
+            chatbox.style.display = "none";
+        }
+    }
+
+    function sendMessage() {
+        let userMessage = document.getElementById('user_input').value;
+        let messagesDiv = document.getElementById('messages');
+        messagesDiv.innerHTML += '<p>You: ' + userMessage + '</p>';
+
+        // Send message to Flask backend
+        fetch('/ask', {
+            method: 'POST',
+            body: new URLSearchParams('user_message=' + userMessage),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            messagesDiv.innerHTML += '<p>Bot: ' + data.response + '</p>';
+            // Scroll to the bottom to always show the latest message
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        });
+
+        document.getElementById('user_input').value = ''; // Clear the input
+    }
+</script>
+
+</body>
+</html>
