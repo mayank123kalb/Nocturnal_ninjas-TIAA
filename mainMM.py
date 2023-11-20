@@ -18,9 +18,9 @@ def ask():
     chat_response = response.last
 
     if(a==0):
-        chat_response = "I can suggest you diet , exercises and also count your calorie intakes what will you like to do ??"
+        chat_response = "I can suggest you iteneraries and places to visit ??"
         a=1
     return jsonify({'response': chat_response})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    app.run(debug=True, host='0.0.0.0', port=5002)
