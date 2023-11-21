@@ -3,8 +3,8 @@ import google.generativeai as palm
 
 app = Flask(__name__)
 
-API_KEY = 'AIzaSyA4Q2RuZuU5p65TOupateJOatfm_jYYXqA'
-palm.configure(api_key=API_KEY)
+
+palm.configure(main=a.run)
 
 @app.route('/')
 def index():
