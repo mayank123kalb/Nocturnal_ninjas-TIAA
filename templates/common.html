@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skin Disease Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            margin: 0;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #007bff;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        p {
+            margin-top: 10px;
+        }
+
+        .disease-info {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        /* New CSS for the image box */
+        .image-box {
+            border: 2px solid #007bff;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            border-radius: 5px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .translate-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        /* Position the translator button in the top right corner */
+        .navbar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px;
+            background-color: #f0f0f0;
+            position: sticky;
+            top: 0;
+        }
+
+        /* Style the navbar */
+        .navbar a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: #fff; /* Text color for navbar links */
+        }
+        .image-display {
+            margin-top: 20px;
+        }
+
+        .image-display img {
+            max-width: 100%;
+            height: auto;
+        }
+        .nav-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.image-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.image-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.image-link:hover {
+    background-color: #0056b3; /* Change color on hover if desired */
+}
+
+.nav-button:hover {
+    background-color: #0056b3; /* Change color on hover if desired */
+}
+.consultation-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px; /* Adjust the padding as needed */
+    cursor: pointer;
+    z-index: 999; /* Ensure it's above other elements */
+    transition: background-color 0.3s; /* Add a transition effect */
+}
+
+/* Style for the consultation button on hover */
+.consultation-button:hover {
+    background-color: #0056b3; /* Change color on hover if desired */
+}
+    </style>
+</head>
+<body>
+    <h1>Skin Disease Prediction</h1>
+    <div class="navbar">
+        <a href="#" id="google_translate_element" class="translate-button">Translate</a>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+
+    <!-- Display uploaded image in a box -->
+    {% if uploaded_image %}
+  <div class="image-button">
+    <a href="{{ uploaded_image }}" target="_blank" class="image-link">
+        <h2>Upload Image</h2>
+    </a>
+</div>
+
+    {% endif %}
+
+    {% if predicted_class %}
+        <h2>Predicted Skin Disease Class:</h2>
+        <p>{{ predicted_class }}</p>
+        <!-- Display disease information here -->
+        <div class="disease-info">
+            <h2>Disease Information (Description, Causes, Common treatment)</h2>
+            <p>{{ disease_description }}</p>
+            <p>{{ disease_causes }}</p>
+            <p>{{ disease_treatment }}</p>
+        </div>
+
+        <!-- Display YouTube video thumbnail based on the provided video URL -->
+       <div class="disease-info">
+    <h2>For more information click here</h2>
+    {% if disease_video_url %}
+        <div id="video-thumbnail"></div>
+        <script type="text/javascript">
+            function getYouTubeVideoId(url) {
+                var videoIdMatch = url.match(/(?:\?v=|\/embed\/|\/\d\/|\/vi\/|\/v\/|\/e\/|youtu.be\/|\/embed\/|\/user\/[a-zA-Z0-9]+\#\/watch\?v=)([^\#\?\&\n]*))/);
+                if (videoIdMatch && videoIdMatch[1]) {
+                    return videoIdMatch[1];
+                }
+                return null;
+            }
+
+            var videoUrl = '{{ disease_video_url }}';
+            var videoId = getYouTubeVideoId(videoUrl);
+
+            if (videoId) {
+                var thumbnailUrl = 'https://img.youtube.com/vi/' + videoId + '/0.jpg';
+                var videoThumbnail = document.getElementById('video-thumbnail');
+                videoThumbnail.innerHTML = '<img src="' + thumbnailUrl + '" alt="Video Thumbnail">';
+            }
+        </script>
+        <p><a href="{{ disease_video_url }}" target="_blank">Watch Video</a></p>
+    {% else %}
+        <p>No video available for this disease.</p>
+    {% endif %}
+</div>
+    {% endif %}
+
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    <a class="consultation-button" href="{{ url_for('consultation') }}">Click For Consultation</a>
+<a class="nav-button" href="{{ url_for('healthhome') }}">Go Back To Home</a>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                { pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
+                'google_translate_element'
+            );
+        }
+
+
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Box Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+      background-color: #f0f8ff; /* Light blue background */
+    }
+
+ .box {
+      border: 1px solid #ccc;
+      padding: 20px;
+      text-align: center;
+      width: 300px; /* Fixed width for all boxes */
+      background-color: white;
+    }
+
+    .box img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .box h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .box button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .box button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>Skin Disease Prediction</h2>
+    <img src="static/assets/images/ab.png" alt="Image 1">
+    <p>Text for Box 1</p>
+    <a href="{{ url_for('common') }}"><button>Go to Page 1</button></a>
+  </div>
+
+  <div class="box">
+    <h2>Diet Bot</h2>
+    <img src="static/assets/images/4.jpg" alt="Image 2">
+    <p>Text for Box 2</p>
+    <a href="http://127.0.0.1:5001"><button>Diet Bot</button></a>
+  </div>
+
+  <div class="box">
+    <h2>Health Ambition</h2>
+    <img src="icon-5.png" alt="Image 3">
+    <p>Text for Box 3</p>
+    <a href="{{ url_for('consultation') }}"><button>Consultation</button></a>
+  </div>
+
+</body>
+</html>

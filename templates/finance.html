@@ -112,12 +112,23 @@
         </form>
 
         {% if prediction %}
-        <p>{{ prediction }}</p>
-        {% endif %}
+                <p>{{ prediction }}</p>
 
-        {% if error %}
-        <p class="error">{{ error }}</p>
-        {% endif %}
+                {% if prediction %}
+    <p>{{ prediction }}</p>
+    {% if description %}
+        <div class="info-box">
+            <h2>Description</h2>
+            <p>{{ description }}</p>
+        </div>
+    {% endif %}
+{% endif %}
+            {% endif %}
+
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+        </div>
     </div>
 </body>
 

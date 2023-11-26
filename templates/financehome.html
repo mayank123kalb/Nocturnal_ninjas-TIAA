@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Analysis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f8ff; /* Light blue background */
+    }
+
+    .big-box {
+      border: 1px solid #ccc;
+      padding: 20px;
+      text-align: center;
+      width: 40%; /* Adjust as needed */
+      background-color: white;
+    }
+
+    .big-box h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .big-box button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .big-box button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="big-box">
+    <h2>Strategic Investment Predictions</h2>
+     <a href="{{ url_for('finance') }}"><button>Explore Predictions</button></a>
+  </div>
+
+  <div class="big-box">
+    <h2>Saving Forecasting</h2>
+    <a href="{{ url_for('index') }}"><button>Explore Forecasting</button></a>
+  </div>
+
+</body>
+</html>
