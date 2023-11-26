@@ -268,8 +268,3 @@ predicted_class = label_encoder.inverse_transform(prediction)
 
 # Print the predicted class
 print(f"The predicted class is: {predicted_class[0]}")
-
-
-
-
-
